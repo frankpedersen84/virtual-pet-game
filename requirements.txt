@@ -1,8 +1,5 @@
-cd C:\Users\Admin-Frankie\CascadeProjects\virtual-pet-game
-python -m pip install -r requirements.txt
-python app.py
-
 Flask==2.3.3
 Flask-SQLAlchemy==3.0.5
 python-dotenv==1.0.0
 gunicorn==21.2.0
+Werkzeug==2.3.7
