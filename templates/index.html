@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Pet Game</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="theme-selector">
+        <button onclick="setTheme('default')" class="theme-btn default-theme">🌞 Default</button>
+        <button onclick="setTheme('dark')" class="theme-btn dark-theme">🌙 Dark</button>
+        <button onclick="setTheme('pastel')" class="theme-btn pastel-theme">🌸 Pastel</button>
+        <button onclick="setTheme('retro')" class="theme-btn retro-theme">👾 Retro</button>
+        <button onclick="setTheme('forest')" class="theme-btn forest-theme">🌲 Forest</button>
+    </div>
+    <div class="game-container">
+        <nav class="navigation">
+            <a href="/" class="nav-item active">Home</a>
+            <a href="/shop" class="nav-item">Shop</a>
+            <a href="/training" class="nav-item">Training</a>
+            <a href="/games" class="nav-item">Games</a>
+        </nav>
+        <div class="stats-container">
+            <div class="money">💰 <span id="money-display">100</span></div>
+            <div class="stats">
+                <div>Happiness: <progress id="happiness-bar" value="50" max="100"></progress></div>
+                <div>Hunger: <progress id="hunger-bar" value="50" max="100"></progress></div>
+                <div>Intelligence: <progress id="intelligence-bar" value="0" max="100"></progress></div>
+            </div>
+        </div>
+        
+        <div class="pet-container">
+            <div id="pet-display"></div>
+        </div>
+
+        <div class="controls">
+            <div class="positive-actions">
+                <button onclick="feedPet()">Feed Pet (💰10)</button>
+                <button onclick="playWithPet()">Play</button>
+                <a href="/shop" class="shop-button">🛍️ Shop</a>
+                <a href="/training" class="training-button">🎓 Training</a>
+            </div>
+            <div class="negative-actions">
+                <button onclick="ignorePet()" class="negative-btn">Ignore</button>
+                <button onclick="scoldPet()" class="negative-btn">Scold</button>
+            </div>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='game.js') }}"></script>
+</body>
+</html>

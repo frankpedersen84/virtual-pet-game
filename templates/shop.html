@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Virtual Pet Shop</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <nav class="navigation">
+            <a href="/" class="nav-item">Home</a>
+            <a href="/shop" class="nav-item active">Shop</a>
+            <a href="/training" class="nav-item">Training</a>
+        </nav>
+
+        <div id="shop" class="section">
+            <h2>Shop</h2>
+            <div class="money-display">Your Money: 💰 <span id="money">0</span></div>
+            <div id="shop-items"></div>
+            <div class="inventory">
+                <h3>Inventory</h3>
+                <div id="inventory-items"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='shop.js') }}"></script>
+</body>
+</html>

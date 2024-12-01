@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Virtual Pet Games</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <nav class="navigation">
+            <a href="/" class="nav-item">Home</a>
+            <a href="/shop" class="nav-item">Shop</a>
+            <a href="/training" class="nav-item">Training</a>
+            <a href="/games" class="nav-item active">Games</a>
+        </nav>
+
+        <div class="section">
+            <h2>Mini Games</h2>
+            <div class="money-display">Your Money: 💰 <span id="money">0</span></div>
+            
+            <div class="games-grid">
+                <div class="game-card" onclick="startGame('catch')">
+                    <h3>🎯 Catch the Mouse</h3>
+                    <p>Click on the mouse before it escapes! Each catch earns coins.</p>
+                    <div class="reward">Reward: 5-15 coins per catch</div>
+                </div>
+
+                <div class="game-card" onclick="startGame('memory')">
+                    <h3>🧠 Pet Memory</h3>
+                    <p>Match pairs of pet-related cards. Complete sets for coins!</p>
+                    <div class="reward">Reward: 20-50 coins per game</div>
+                </div>
+
+                <div class="game-card" onclick="startGame('quiz')">
+                    <h3>📚 Pet Quiz</h3>
+                    <p>Answer questions about pet care and training.</p>
+                    <div class="reward">Reward: 10-30 coins per correct answer</div>
+                </div>
+            </div>
+
+            <div id="game-container" class="game-container" style="display: none;">
+                <div id="game-header">
+                    <h3 id="game-title"></h3>
+                    <div id="game-stats"></div>
+                </div>
+                <div id="game-area"></div>
+                <button id="game-close" onclick="closeGame()" class="button">Close Game</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='games.js') }}"></script>
+</body>
+</html>

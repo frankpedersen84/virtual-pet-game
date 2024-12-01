@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pet Training</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="game-container">
+        <div class="training-area">
+            <h2>Pet Training Academy</h2>
+            
+            <div class="pet-stats">
+                <div class="intelligence-stat">
+                    <span>Intelligence:</span>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="intelligence-bar"></div>
+                    </div>
+                </div>
+                <div class="money-display">💰 <span id="money-amount">0</span></div>
+            </div>
+
+            <div class="pet-container">
+                <div class="pet" id="pet-display"></div>
+                <div class="energy-boost">
+                    <button id="boost-button" class="boost-button">
+                        ⚡ Energy Boost (💰25)
+                    </button>
+                    <div class="cooldown-timer" id="cooldown-timer"></div>
+                </div>
+            </div>
+
+            <div class="tricks-container">
+                <h3>Available Tricks</h3>
+                <div class="tricks-grid" id="tricks-list">
+                    <!-- Tricks will be populated by JavaScript -->
+                </div>
+            </div>
+
+            <div class="training-controls">
+                <button id="train-button" class="primary-button">Train Pet</button>
+                <button id="perform-button" class="secondary-button">Perform Tricks</button>
+            </div>
+
+            <div class="training-progress">
+                <div id="training-message"></div>
+            </div>
+        </div>
+        
+        <button onclick="window.location.href='/'" class="return-button">Return to Pet</button>
+    </div>
+    
+    <script src="{{ url_for('static', filename='training.js') }}"></script>
+</body>
+</html>

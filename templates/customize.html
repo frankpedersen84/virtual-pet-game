@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customize Your Pet</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="game-container">
+        <h1>Customize Your Pet</h1>
+        
+        <div class="customize-section">
+            <h2>Pet Name</h2>
+            <input type="text" id="pet-name" placeholder="Enter your pet's name" required>
+        </div>
+        
+        <div class="customize-section">
+            <h2>Pet Type</h2>
+            <div class="pet-type-selection">
+                <button onclick="selectPetType('cat')">🐱 Cat</button>
+                <button onclick="selectPetType('dog')">🐶 Dog</button>
+                <button onclick="selectPetType('rabbit')">🐰 Rabbit</button>
+                <button onclick="selectPetType('hamster')">🐹 Hamster</button>
+                <button onclick="selectPetType('bird')">🐦 Bird</button>
+            </div>
+        </div>
+        
+        <div class="customize-section">
+            <h2>Pet Color</h2>
+            <div id="color-selection" class="color-selection">
+                <button onclick="selectColor('default')">Default</button>
+                <button onclick="selectColor('black')">Black</button>
+                <button onclick="selectColor('white')">White</button>
+                <button onclick="selectColor('brown')">Brown</button>
+                <button onclick="selectColor('orange')">Orange</button>
+                <button onclick="selectColor('blue')">Blue</button>
+            </div>
+        </div>
+        
+        <div class="preview-section">
+            <h2>Pet Preview</h2>
+            <div id="pet-preview" class="pet-preview">🐱</div>
+        </div>
+        
+        <button onclick="savePetCustomization()" class="save-button">Save Pet</button>
+        <a href="/" class="return-button">Return to Game</a>
+    </div>
+
+    <script>
+        let selectedPetType = 'cat';
+        let selectedColor = 'default';
+
+        const petEmojis = {
+            cat: {
+                happy: {
+                    default: '😺',
+                    black: '🐈‍⬛',
+                    white: '😸',
+                    orange: '😹'
+                },
+                normal: {
+                    default: '😸',
+                    black: '🐈',
+                    white: '😼',
+                    orange: '😻'
+                }
+            },
+            dog: {
+                happy: {
+                    default: '🐶',
+                    black: '🐕‍🦺',
+                    white: '🐩',
+                    brown: '🐺'
+                },
+                normal: {
+                    default: '🐕',
+                    black: '🐕‍🦺',
+                    white: '🐩',
+                    brown: '🐺'
+                }
+            },
+            rabbit: {
+                happy: {
+                    default: '🐰',
+                    white: '🐇',
+                    brown: '🐰'
+                },
+                normal: {
+                    default: '🐇',
+                    white: '🐰',
+                    brown: '🐇'
+                }
+            },
+            hamster: {
+                happy: {
+                    default: '🐹',
+                    brown: '🐹',
+                    white: '🐹'
+                },
+                normal: {
+                    default: '🐹',
+                    brown: '🐹',
+                    white: '🐹'
+                }
+            },
+            bird: {
+                happy: {
+                    default: '🐤',
+                    blue: '🐦',
+                    black: '🐧'
+                },
+                normal: {
+                    default: '🐦',
+                    blue: '🐤',
+                    black: '🐧'
+                }
+            }
+        };
+
+        function selectPetType(type) {
+            selectedPetType = type;
+            updatePetPreview();
+        }
+
+        function selectColor(color) {
+            selectedColor = color;
+            updatePetPreview();
+        }
+
+        function updatePetPreview() {
+            const preview = document.getElementById('pet-preview');
+            preview.textContent = petEmojis[selectedPetType]['happy'][selectedColor] || 
+                                   petEmojis[selectedPetType]['happy']['default'];
+        }
+
+        function savePetCustomization() {
+            const petName = document.getElementById('pet-name').value.trim();
+            
+            if (!petName) {
+                alert('Please enter a pet name');
+                return;
+            }
+
+            fetch('/api/pet/customize', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    name: petName,
+                    pet_type: selectedPetType,
+                    color_theme: selectedColor
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    window.location.href = '/';
+                } else {
+                    alert('Failed to save pet: ' + data.error);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred while saving your pet');
+            });
+        }
+
+        // Initialize preview on page load
+        updatePetPreview();
+    </script>
+</body>
+</html>
